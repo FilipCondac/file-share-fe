@@ -1,4 +1,5 @@
-/* eslint-disable */
+//@ts-ignore
+//@ts-nocheck
 import TopNav from "@/components/TopNav";
 import axios from "axios";
 import { Group } from "next/dist/shared/lib/router/utils/route-regex";
@@ -15,39 +16,12 @@ const group = () => {
   const router = useRouter();
   const isAuthorized = authorizedStatus();
 
-  interface Group {
-    _id: string;
-    name: string;
-    phrase: string;
-    members: string[];
-    createdAt: Date;
-    updatedAt: Date;
-    creator: string;
-    filename: string;
-    membersDisplay: string[];
-  }
-
-  interface GroupFile {
-    _id: string;
-    filename: string;
-    sizeInBytes: string;
-    format: string;
-  }
-
-  interface File {
-    name: string;
-    type: string;
-    size: number;
-    lastModified: number;
-  }
-
   const [group, setGroup] = React.useState<Group | null>(null);
   const [accountOptions, setAccountOptions] = React.useState(false);
-  const [groupFiles, setGroupFiles] = React.useState<GroupFile[] | null>(null);
-
+  const [groupFiles, setGroupFiles] = React.useState<File[] | null>(null);
   const [expandedFile, setExpandedFile] = useState(null as number | null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState(null);
   const [id, setID] = useState(null);
   const [uploadingStatus, setUploadingStatus] = useState<
     "Uploading" | "Upload Failed" | "Uploaded" | "Upload"
@@ -89,14 +63,12 @@ const group = () => {
     setUploadingStatus("Uploading");
     const formData = new FormData();
     if (file) {
-      // @ts-ignore
       formData.append("myFile", file);
     }
 
     const { groupID } = router.query;
     if (groupID) {
-      const groupIDString = Array.isArray(groupID) ? groupID[0] : groupID;
-      formData.append("groupID", groupIDString);
+      formData.append("groupID", groupID);
     }
 
     try {
@@ -179,7 +151,7 @@ const group = () => {
     }
   };
 
-  const filteredFiles = groupFiles?.filter((file) =>
+  const filteredFiles = groupFiles?.files.filter((file) =>
     file.filename.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -221,7 +193,7 @@ const group = () => {
                 <div>
                   <h1 className="mb-2 text-lg font-bold">Number of Files:</h1>
                   <h1 className="mb-2 text-lg font-light text-sky-400">
-                    {groupFiles?.length}
+                    {groupFiles?.files.length}
                   </h1>
                 </div>
                 <div>
@@ -399,7 +371,7 @@ const group = () => {
                         file={{
                           format: file.type.split("/")[1],
                           name: file.name,
-                          sizeInBytes: file.size.toString(),
+                          sizeInBytes: file.size,
                         }}
                       />
                     )}
