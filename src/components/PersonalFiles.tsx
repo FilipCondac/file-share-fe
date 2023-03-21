@@ -95,7 +95,7 @@ const PersonalFiles = () => {
                       <h1 className="mt-2 text-sm font-bold">
                         Size:{" "}
                         <span className="font-light">
-                          {calcBytes(file.sizeInBytes)}
+                          {calcBytes(file.sizeInBytes.toString())}
                           <span className="ml-1 font-bold">mb</span>
                         </span>
                       </h1>

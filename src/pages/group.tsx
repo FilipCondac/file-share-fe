@@ -14,6 +14,16 @@ const group = () => {
   const router = useRouter();
   const isAuthorized = authorizedStatus();
 
+  interface Group {
+    _id: string;
+    name: string;
+    phrase: string;
+    members: string[];
+    createdAt: Date;
+    updatedAt: Date;
+    creator: string;
+  }
+
   const [group, setGroup] = React.useState<Group | null>(null);
   const [accountOptions, setAccountOptions] = React.useState(false);
   const [groupFiles, setGroupFiles] = React.useState<File[] | null>(null);
@@ -66,7 +76,8 @@ const group = () => {
 
     const { groupID } = router.query;
     if (groupID) {
-      formData.append("groupID", groupID);
+      const groupIDString = Array.isArray(groupID) ? groupID[0] : groupID;
+      formData.append("groupID", groupIDString);
     }
 
     try {
@@ -305,7 +316,7 @@ const group = () => {
                               <h1 className="mt-2 text-sm font-bold">
                                 Size:{" "}
                                 <span className="font-light">
-                                  {calcBytes(file.sizeInBytes)}
+                                  {calcBytes(file.sizeInBytes.toString())}
                                   <span className="ml-1 font-bold">mb</span>
                                 </span>
                               </h1>
