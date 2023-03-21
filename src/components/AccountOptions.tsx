@@ -3,7 +3,12 @@ import authorizedStatus from "libs/authorizedStatus";
 import axios from "axios";
 
 const AccountOptions = () => {
-  const [user, setUser] = React.useState(null);
+  interface User {
+    displayName: string;
+    email: string;
+  }
+
+  const [user, setUser] = React.useState<User | null>(null);
 
   React.useEffect(() => {
     const fetchAuthorizedStatus = async () => {
@@ -71,7 +76,7 @@ const AccountOptions = () => {
             <input
               type="text"
               className="p-1 px-2 rounded-lg bg-slate-700"
-              placeholder={user.displayName}
+              placeholder={user?.displayName}
               onChange={(e) => setDisplayName(e.target.value)}
             ></input>
           </div>
