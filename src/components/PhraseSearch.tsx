@@ -13,8 +13,6 @@ interface File {
   // other properties
 }
 
-const [file, setFile] = useState<File | null>(null);
-
 const PhraseSearch = (props: any) => {
   const [searchTerm, setSearchTerm] = useState("");
   let [file, setFile] = useState<File | null>(null);
