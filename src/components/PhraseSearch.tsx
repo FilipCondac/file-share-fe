@@ -15,7 +15,7 @@ interface File {
 
 const [file, setFile] = useState<File | null>(null);
 
-const PhraseSearch: React.FC<Props> = (props: any) => {
+const PhraseSearch = (props: any) => {
   const [searchTerm, setSearchTerm] = useState("");
   let [file, setFile] = useState<File | null>(null);
   const [fileNotFound, setFileNotFound] = useState(false);
