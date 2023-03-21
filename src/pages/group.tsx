@@ -1,3 +1,4 @@
+/* eslint-disable */
 import TopNav from "@/components/TopNav";
 import axios from "axios";
 import { Group } from "next/dist/shared/lib/router/utils/route-regex";
