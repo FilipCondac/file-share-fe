@@ -5,9 +5,19 @@ import fileDownload from "js-file-download";
 
 interface Props {}
 
+interface File {
+  id: string;
+  name: string;
+  format: string;
+  sizeInBytes: number;
+  // other properties
+}
+
+const [file, setFile] = useState<File | null>(null);
+
 const PhraseSearch: React.FC<Props> = (props: any) => {
   const [searchTerm, setSearchTerm] = useState("");
-  let [file, setFile] = useState(null);
+  let [file, setFile] = useState<File | null>(null);
   const [fileNotFound, setFileNotFound] = useState(false);
 
   //   * The bellow above does the following:
@@ -40,10 +50,12 @@ const PhraseSearch: React.FC<Props> = (props: any) => {
 3. After the download is complete, it resets the component */
 
   const handleDownload = async () => {
-    const { data } = await axios.get(`api/files/id/${file.id}/download`, {
-      responseType: "blob",
-    });
-    fileDownload(data, file.name);
+    if (file) {
+      const { data } = await axios.get(`api/files/id/${file.id}/download`, {
+        responseType: "blob",
+      });
+      fileDownload(data, file.name);
+    }
   };
 
   /* The bellow bellow does the following:
@@ -115,7 +127,7 @@ const PhraseSearch: React.FC<Props> = (props: any) => {
               />
             </div>
             <span className="m-auto mt-3 text-center">
-              Size: {calcBytes(file.sizeInBytes)}
+              Size: {calcBytes(file.sizeInBytes.toString())}
             </span>
             <div className="m-auto mt-5">
               <button
