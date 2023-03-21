@@ -118,6 +118,7 @@ const App = () => {
                     <h1 className="m-auto mb-5 text-lg font-bold text-center text-white">
                       Search files by phrase
                     </h1>
+
                     <PhraseSearch setComponentRender={setComponentRender} />
                   </div>
                 )}

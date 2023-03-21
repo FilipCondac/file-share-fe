@@ -89,6 +89,7 @@ const group = () => {
     setUploadingStatus("Uploading");
     const formData = new FormData();
     if (file) {
+      // @ts-ignore
       formData.append("myFile", file);
     }
 
