@@ -24,13 +24,21 @@ const group = () => {
     updatedAt: Date;
     creator: string;
     filename: string;
+    membersDisplay: string[];
   }
 
   interface GroupFile {
     _id: string;
     filename: string;
-    sizeInBytes: number;
+    sizeInBytes: string;
     format: string;
+  }
+
+  interface File {
+    name: string;
+    type: string;
+    size: number;
+    lastModified: number;
   }
 
   const [group, setGroup] = React.useState<Group | null>(null);
@@ -39,7 +47,7 @@ const group = () => {
 
   const [expandedFile, setExpandedFile] = useState(null as number | null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
   const [id, setID] = useState(null);
   const [uploadingStatus, setUploadingStatus] = useState<
     "Uploading" | "Upload Failed" | "Uploaded" | "Upload"
@@ -170,7 +178,7 @@ const group = () => {
     }
   };
 
-  const filteredFiles = groupFiles?.files.filter((file) =>
+  const filteredFiles = groupFiles?.filter((file) =>
     file.filename.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -212,7 +220,7 @@ const group = () => {
                 <div>
                   <h1 className="mb-2 text-lg font-bold">Number of Files:</h1>
                   <h1 className="mb-2 text-lg font-light text-sky-400">
-                    {groupFiles?.files.length}
+                    {groupFiles?.length}
                   </h1>
                 </div>
                 <div>
@@ -390,7 +398,7 @@ const group = () => {
                         file={{
                           format: file.type.split("/")[1],
                           name: file.name,
-                          sizeInBytes: file.size,
+                          sizeInBytes: file.size.toString(),
                         }}
                       />
                     )}
