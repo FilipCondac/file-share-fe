@@ -71,7 +71,7 @@ const AccountOptions = () => {
             <input
               type="text"
               className="p-1 px-2 rounded-lg bg-slate-700"
-              placeholder={user?.displayName}
+              placeholder={user.displayName}
               onChange={(e) => setDisplayName(e.target.value)}
             ></input>
           </div>
