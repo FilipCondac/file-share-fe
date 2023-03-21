@@ -4,8 +4,16 @@ import React, { useEffect, useState } from "react";
 import { calcBytes } from "libs/calcBytes";
 
 const PersonalFiles = () => {
+  interface UserFile {
+    _id: string;
+    filename: string;
+    sizeInBytes: number;
+    format: string;
+    displayPhrase: string;
+  }
+
+  const [userFiles, setUserFiles] = useState<UserFile[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [userFiles, setUserFiles] = useState([]);
   const [expandedFile, setExpandedFile] = useState(null as number | null);
 
   const handleDownload = async (id: string, name: string) => {
