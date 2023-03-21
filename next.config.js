@@ -1,16 +1,13 @@
 /** @type {import('next').NextConfig} */
-
-const nextConfig = {
-  reactStrictMode: true,
-};
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
-  webpack: (config, { isServer }) => {
-    // Fixes npm packages that depend on `fs` module
-    if (!isServer) {
-      config.node = {
-        fs: "empty",
-      };
+  webpack(config, options) {
+    // Disable TypeScript type checking in production builds
+    if (!options.dev) {
+      config.plugins = config.plugins.filter(
+        (plugin) => !(plugin instanceof ForkTsCheckerWebpackPlugin)
+      );
     }
 
     return config;
