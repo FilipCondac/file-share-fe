@@ -1,13 +1,5 @@
 {
   "/_app": "pages/_app.js",
-  "/api/hello": "pages/api/hello.js",
-  "/group": "pages/group.html",
-  "/login": "pages/login.html",
-  "/_document": "pages/_document.js",
-  "/": "pages/index.html",
-  "/register": "pages/register.html",
   "/_error": "pages/_error.js",
-  "/download/id/[id]": "pages/download/id/[id].js",
-  "/download/phrase/[phrase]": "pages/download/phrase/[phrase].js",
-  "/404": "pages/404.html"
+  "/_document": "pages/_document.js"
 }

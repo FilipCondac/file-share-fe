@@ -41,7 +41,6 @@ const PersonalFiles = () => {
 
   const getUserFiles = async () => {
     const { data } = await axios.get("api/files/getUserFiles");
-    console.log(data);
     setUserFiles(data.files);
   };
   return (

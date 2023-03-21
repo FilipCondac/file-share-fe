@@ -156,7 +156,6 @@ const TopNav = (props: any) => {
       if (status === 200) {
         setJoinStatus("Joined Group Successfully");
       } else if (status === 404) {
-        console.log(data.message);
         setJoinStatus("Group Not Found");
       } else {
         console.log(data.message);

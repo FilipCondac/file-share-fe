@@ -39,7 +39,6 @@ const group = () => {
   }, [group]);
 
   const getGroup = async () => {
-    console.log(router.query);
     const { groupID } = router.query;
 
     try {
@@ -93,7 +92,7 @@ const group = () => {
       const { data } = await axios.post("api/files/leaveGroup", {
         groupID: router.query.groupID,
       });
-      console.log(data);
+
       window.location.href = "/";
     } catch (error: any) {
       console.log(error);
@@ -109,7 +108,6 @@ const group = () => {
       if (confirmed) {
         const { data } = await axios.delete(`api/files/deleteGroup/${id}`);
         window.location.href = "/";
-        console.log(data.message);
       }
     } catch (error: any) {
       console.log(error);
@@ -130,7 +128,7 @@ const group = () => {
     const { groupID } = router.query;
     try {
       const { data } = await axios.get(`api/files/getFilesByGroup/${groupID}`);
-      console.log(data);
+
       setGroupFiles(data);
     } catch (error: any) {
       console.log(error);
