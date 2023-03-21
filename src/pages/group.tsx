@@ -22,11 +22,20 @@ const group = () => {
     createdAt: Date;
     updatedAt: Date;
     creator: string;
+    filename: string;
+  }
+
+  interface GroupFile {
+    _id: string;
+    filename: string;
+    sizeInBytes: number;
+    format: string;
   }
 
   const [group, setGroup] = React.useState<Group | null>(null);
   const [accountOptions, setAccountOptions] = React.useState(false);
-  const [groupFiles, setGroupFiles] = React.useState<File[] | null>(null);
+  const [groupFiles, setGroupFiles] = React.useState<GroupFile[] | null>(null);
+
   const [expandedFile, setExpandedFile] = useState(null as number | null);
   const [searchQuery, setSearchQuery] = useState("");
   const [file, setFile] = useState(null);
