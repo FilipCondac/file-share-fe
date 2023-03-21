@@ -1,9 +1,11 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/next"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["**/*.ts"]
+      }
     }
   ]
 }
