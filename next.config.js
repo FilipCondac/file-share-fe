@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
@@ -13,6 +12,3 @@ module.exports = {
     return config;
   },
 };
-
-// eslint-disable-next-line no-undef
-module.exports = nextConfig;
